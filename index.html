@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeleBackup - Descarga la APK de Almacenamiento Ilimitado</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- QR Code Generator Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            telegram: {
+              50: '#f0f7fc',
+              100: '#e1eff9',
+              500: '#24A1DE',
+              600: '#1d84b8',
+              700: '#176993',
+              800: '#135375',
+              900: '#124560',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Estilos premium de glassmorphism y gradientes */
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .dark .glass {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #24a1de 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col justify-between">
+
+  <!-- Header / Barra de Utilidades -->
+  <header class="w-full max-w-4xl mx-auto px-4 pt-4 pb-2 flex justify-between items-center z-10">
+    <div class="flex items-center space-x-2">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-xs font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">Versión Gratuita</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <!-- Botón Modo Oscuro -->
+      <button id="themeToggle" class="p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:scale-105 active:scale-95 transition-all text-slate-600 dark:text-slate-300" title="Cambiar tema">
+        <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m14.071-7.071l-.707.707M6.343 17.657l-.707.707m2.828 0l-.707-.707m12.02-12.02l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+        <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+      </button>
+      <!-- Botón de compartir -->
+      <button id="shareBtn" class="px-3 py-1.5 text-xs font-medium rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:scale-105 active:scale-95 transition-all flex items-center space-x-1 text-slate-600 dark:text-slate-300">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.028-2.014m0 6.544l-4.028-2.014M12 8.5V3.5m0 0L9.5 6M12 3.5L14.5 6m2.684 4.742a3 3 0 11-4.028 4.028M12 15.5v5m0 0l-2.5-2.5m2.5 2.5l2.5-2.5"></path></svg>
+        <span>Compartir Enlace</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal del Flyer / Landing Page -->
+  <main class="w-full max-w-4xl mx-auto px-4 py-4 flex-grow flex items-center justify-center">
+    <div class="w-full glass border border-white/20 dark:border-slate-800/80 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
+      
+      <!-- Banner Principal / Hero -->
+      <div class="bg-gradient-to-r from-telegram-600 to-blue-700 p-8 text-white relative overflow-hidden">
+        <!-- Elementos decorativos abstractos -->
+        <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-white/10 blur-xl"></div>
+        <div class="absolute -left-10 -top-10 w-32 h-32 rounded-full bg-sky-400/20 blur-lg"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div class="flex items-center space-x-4">
+            <!-- Logotipo SVG Mejorado -->
+            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
+              <svg class="w-10 h-10 text-telegram-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.375 10.125C19.375 7.025 16.85 4.5 13.75 4.5C11.35 4.5 9.3 6.025 8.525 8.175C8.025 7.925 7.45 7.75 6.875 7.75C4.775 7.75 3 9.525 3 11.625C3 13.525 4.4 15.1 6.225 15.425M19.375 10.125C19.75 10.125 20.125 10.2 20.475 10.35C21.375 10.725 22 11.625 22 12.625C22 13.925 21.025 14.975 19.75 15.1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15.5 11.5L8.5 15L10 12.5L15.5 11.5Z" fill="currentColor"/>
+                <path d="M8.5 15L15.5 11.5L12 18L10 15L8.5 15Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">TeleBackup</h1>
+              <p class="text-sky-100 text-sm md:text-base font-medium mt-1">Sube tus fotos de forma automática e ilimitada a tu propio Telegram.</p>
+            </div>
+          </div>
+          
+          <div class="bg-emerald-500/25 backdrop-blur-md px-4 py-2 rounded-2xl border border-emerald-400/30 self-start md:self-auto flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-200">100% Gratis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid de Contenido Principal -->
+      <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Columna Izquierda: Información de la App y Descarga (7 columnas) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <span>Libera espacio sin pagar suscripciones</span>
+              <span class="text-xl">📸✨</span>
+            </h2>
+            <p class="mt-2 text-slate-600 dark:text-slate-300 leading-relaxed text-sm md:text-base">
+              ¿Cansado de los avisos de "Almacenamiento lleno"? Con <strong class="text-telegram-500 font-semibold">TeleBackup</strong> puedes automatizar el respaldo de toda tu galería en un chat privado de Telegram. Es seguro, directo y completamente ilimitado.
+            </p>
+          </div>
+
+          <!-- Principales Beneficios de la APK -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Beneficio 1 -->
+            <div class="p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 flex space-x-3 items-start">
+              <div class="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 mt-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5a3 3 0 10-3 3h3zm0-3c1.657 0 3 1.343 3 3a3 3 0 01-3 3H9"></path></svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Acceso Gratis de por Vida</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Usa la infraestructura ilimitada de tu Telegram. Tus archivos te pertenecen siempre.</p>
+              </div>
+            </div>
+
+            <!-- Beneficio 2 -->
+            <div class="p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 flex space-x-3 items-start">
+              <div class="p-2 rounded-lg bg-telegram-100 dark:bg-telegram-950/50 text-telegram-500 mt-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Auto-Limpieza</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Borra automáticamente de tu dispositivo las fotos que ya fueron respaldadas con éxito.</p>
+              </div>
+            </div>
+
+            <!-- Beneficio 3 -->
+            <div class="p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 flex space-x-3 items-start">
+              <div class="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-950/50 text-indigo-500 mt-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white font-sans">Nube Privada</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Los datos viajan de forma cifrada a tu chat guardado de Telegram sin intermediarios.</p>
+              </div>
+            </div>
+
+            <!-- Beneficio 4 -->
+            <div class="p-4 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 flex space-x-3 items-start">
+              <div class="p-2 rounded-lg bg-amber-100 dark:bg-amber-950/50 text-amber-500 mt-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white">Sencillo y Automático</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Se ejecuta discretamente en segundo plano. Configúralo una vez y olvídate.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Instrucciones de Instalación de APK -->
+          <div class="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden bg-white/50 dark:bg-slate-900/30">
+            <button onclick="toggleInstructions()" class="w-full p-4 flex justify-between items-center text-left font-bold text-sm text-slate-800 dark:text-white hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition-colors">
+              <span class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-telegram-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                ¿Cómo instalar un archivo APK en Android?
+              </span>
+              <svg id="instructionsArrow" class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
+            
+            <div id="instructionsContent" class="hidden p-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-3">
+              <div class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-telegram-500 text-white text-[10px] flex items-center justify-center font-bold flex-shrink-0 mt-0.5">1</span>
+                <p>Presiona el botón <strong class="text-slate-800 dark:text-white">"Descargar APK"</strong> a la derecha para bajar el archivo instalador.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-telegram-500 text-white text-[10px] flex items-center justify-center font-bold flex-shrink-0 mt-0.5">2</span>
+                <p>Si tu navegador te advierte sobre archivos dañinos (aviso estándar para todas las APKs externas a Play Store), presiona <strong class="text-slate-800 dark:text-white">"Descargar de todos modos"</strong>.</p>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-telegram-500 text-white text-[10px] flex items-center justify-center font-bold flex-shrink-0 mt-0.5">3</span>
+                <p>Abre el archivo descargado. Si es necesario, activa el permiso de <strong class="text-slate-800 dark:text-white">"Permitir desde esta fuente"</strong> en los ajustes de tu navegador para proceder.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha: Descarga, QR dinámico y contacto (5 columnas) -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-6 lg:border-l lg:border-slate-200 lg:dark:border-slate-800 lg:pl-8">
+          
+          <!-- Botón de Descarga Directa -->
+          <div class="text-center lg:text-left space-y-4">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">Descarga Segura ⚡</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                La aplicación está lista para funcionar de inmediato. ¡Consigue el instalador libre de publicidad!
+              </p>
+            </div>
+
+            <!-- Botón de descarga principal vinculado localmente al repositorio -->
+            <a href="TeleBackup.apk" download id="downloadApkBtn" class="w-full py-4 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold hover:shadow-lg hover:shadow-emerald-500/20 active:scale-98 transition-all flex items-center justify-center space-x-3 border-b-4 border-emerald-700">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.17l-4.59-4.59L7.83 10.17 11 13.34V7h2v6.34l3.17-3.17 1.41 1.41L13 16.17V16c-.26.26-.62.4-1 .4s-.74-.14-1-.41z" />
+              </svg>
+              <div class="text-left">
+                <span class="block text-xs font-medium opacity-80 leading-none">Instalador Directo</span>
+                <span class="block text-base font-extrabold mt-0.5">Descargar APK Gratis</span>
+              </div>
+            </a>
+            
+            <p class="text-[10px] text-center text-slate-400 dark:text-slate-500 italic">
+              *Compatible con dispositivos Android 8.0 o superior.
+            </p>
+
+            <!-- Bloque de Información: Requisito de Licencia por Telegram -->
+            <div class="p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-500/5 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-left text-xs space-y-1">
+              <div class="flex items-center gap-1.5 font-bold text-amber-700 dark:text-amber-400">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+                <span>¡Paso Obligatorio! Activación de Licencia</span>
+              </div>
+              <p class="leading-relaxed opacity-90">
+                Después de descargar e instalar la app, <strong>debes escribirme por Telegram para solicitar tu código de activación</strong>. Sin este código de licencia, los respaldos automatizados no podrán ejecutarse.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tarjeta del QR Dinámico -->
+          <div class="bg-white dark:bg-slate-900 p-4 rounded-3xl shadow-inner border border-slate-100 dark:border-slate-800/80 flex flex-col items-center">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-telegram-500 mb-2 block">¿Estás en tu Computadora?</span>
+            
+            <!-- Contenedor QR con diseño tecnológico -->
+            <div class="p-3 bg-white rounded-2xl shadow-md border border-slate-100 inline-block relative group transition-transform hover:scale-102">
+              <canvas id="qrCodeCanvas" class="mx-auto block"></canvas>
+              <!-- Logo flotante en el centro del QR -->
+              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="w-9 h-9 bg-white rounded-full flex items-center justify-center p-1 shadow-md border border-slate-200">
+                  <svg class="w-6 h-6 text-telegram-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-.97.53-1.34.52-.42-.01-1.21-.24-1.8-.43-.72-.24-1.3-.37-1.25-.79.03-.22.33-.44.92-.68 3.59-1.56 5.99-2.59 7.2-3.1 3.43-1.42 4.14-1.67 4.61-1.68.1 0 .33.02.48.15.12.1.16.24.18.35.01.07.02.22.01.29z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-2 text-center font-medium">
+              Escanea para abrir esta página en tu móvil y descargar la APK.
+            </p>
+          </div>
+
+          <!-- Soporte y Preguntas -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs px-1 text-slate-500 dark:text-slate-400">
+              <span>¿Necesitas ayuda con la instalación?</span>
+            </div>
+            
+            <button id="copyBtn" class="w-full py-3.5 px-5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold hover:shadow-sm active:scale-98 transition-all flex items-center justify-center space-x-2 border border-slate-200 dark:border-slate-700">
+              <svg class="w-5 h-5 text-telegram-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.13 7.19c-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-.97.53-1.34.52-.42-.01-1.21-.24-1.8-.43-.72-.24-1.3-.37-1.25-.79.03-.22.33-.44.92-.68 3.59-1.56 5.99-2.59 7.2-3.1 3.43-1.42 4.14-1.67 4.61-1.68.1 0 .33.02.48.15.12.1.16.24.18.35z"/></svg>
+              <span>Contactar Soporte en Telegram</span>
+            </button>
+            <div id="copyNotification" class="opacity-0 transition-opacity duration-300 text-[11px] text-center font-semibold text-emerald-600 dark:text-emerald-400">
+              ¡Usuario @TecniMago copiado al portapapeles! Abriendo chat...
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Pie de Página -->
+      <div class="bg-slate-100/80 dark:bg-slate-900/40 border-t border-slate-200/50 dark:border-slate-800/50 px-6 py-4 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-2">
+        <span>TeleBackup Gratuito © 2026</span>
+        <div class="flex items-center space-x-1">
+          <span>Soporte directo por</span>
+          <a href="https://t.me/TecniMago" class="font-bold text-telegram-500 hover:underline">@TecniMago</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="w-full text-center py-4 text-xs text-slate-400 dark:text-slate-600">
+    Alojado con pasión en GitHub Pages. Desarrollado por @TecniMago.
+  </footer>
+
+  <script>
+    // Inicializar el Código QR con la URL del sitio web actual
+    const currentWebUrl = window.location.href.includes('localhost') || window.location.href.includes('127.0.0.1')
+      ? 'https://t.me/TecniMago'
+      : window.location.href;
+
+    const qr = new QRious({
+      element: document.getElementById('qrCodeCanvas'),
+      value: currentWebUrl,
+      size: 150,
+      background: '#ffffff',
+      foreground: '#0f172a', // slate-900
+      level: 'H'
+    });
+
+    // Control de Acordeón para las Instrucciones de Instalación
+    function toggleInstructions() {
+      const content = document.getElementById('instructionsContent');
+      const arrow = document.getElementById('instructionsArrow');
+      content.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    }
+
+    // Control de Temas (Claro / Oscuro)
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    // Inicializar de acuerdo a la preferencia del sistema
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+      qr.set({ foreground: '#0f172a' });
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      
+      if (isDark) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    });
+
+    // Acción para compartir el enlace del sitio
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', () => {
+      const currentUrl = window.location.href;
+      const tempInput = document.createElement('input');
+      tempInput.value = currentUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          const origText = shareBtn.innerHTML;
+          shareBtn.innerHTML = `
+            <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            <span class="text-emerald-500 font-bold">¡Copiado!</span>
+          `;
+          setTimeout(() => {
+            shareBtn.innerHTML = origText;
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Error al intentar copiar el enlace', err);
+      }
+      document.body.removeChild(tempInput);
+    });
+
+    // Botón de contacto / Acción Copiar Soporte
+    const copyBtn = document.getElementById('copyBtn');
+    const copyNotification = document.getElementById('copyNotification');
+
+    copyBtn.addEventListener('click', () => {
+      const tempInput = document.createElement('input');
+      tempInput.value = '@TecniMago';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          copyNotification.classList.remove('opacity-0');
+          copyNotification.classList.add('opacity-100');
+          
+          setTimeout(() => {
+            copyNotification.classList.remove('opacity-100');
+            copyNotification.classList.add('opacity-0');
+          }, 3000);
+        }
+      } catch (err) {
+        console.error('No se pudo copiar el texto', err);
+      }
+      
+      document.body.removeChild(tempInput);
+      
+      setTimeout(() => {
+        window.open('https://t.me/TecniMago', '_blank');
+      }, 800);
+    });
+  </script>
+</body>
+</html>
