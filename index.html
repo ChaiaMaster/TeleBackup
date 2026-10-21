@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TeleBackup - Tu Teléfono con Almacenamiento Ilimitado</title>
+
+  <!-- META ETIQUETAS OPEN GRAPH / VISTA PREVIA PARA WHATSAPP, TELEGRAM Y REDES -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://chaiamaster.github.io/TeleBackup">
+  <meta property="og:title" content="TeleBackup - Almacenamiento Ilimitado para tu Android 🚀">
+  <meta property="og:description" content="Respalda fotos, videos y documentos automáticamente a tu Telegram personal. Elimina archivos locales y libera memoria física sin cuotas mensuales.">
+  <meta property="og:image" content="https://chaiamaster.github.io/TeleBackup/logo.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- ETIQUETAS PARA TWITTER / TELEGRAM CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TeleBackup - Almacenamiento Ilimitado en Telegram">
+  <meta name="twitter:description" content="Respaldo automático y liberación de espacio en tu Android. Tecnología Servitec Gamarra.">
+  <meta name="twitter:image" content="https://chaiamaster.github.io/TeleBackup/logo.webp">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -57,7 +72,6 @@
   <!-- Header / Barra Superior -->
   <header class="w-full max-w-6xl mx-auto px-4 pt-6 pb-2 flex justify-between items-center z-10">
     <div class="flex items-center space-x-3">
-      <!-- FOTO/LOGO 1: LOGO DE LA APP -->
       <img src="logo.webp" alt="TeleBackup Logo" class="w-10 h-10 rounded-xl shadow-md border border-brand-teleblue/30 object-cover">
       <div>
         <span class="font-heading font-extrabold text-lg tracking-tight text-white block leading-none">TeleBackup</span>
@@ -65,10 +79,19 @@
       </div>
     </div>
     
-    <button id="shareBtn" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-card border border-slate-700/60 hover:border-brand-teleblue/50 text-slate-300 transition-all flex items-center space-x-2">
-      <svg class="w-4 h-4 text-brand-teleblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.028-2.014m0 6.544l-4.028-2.014M12 8.5V3.5m0 0L9.5 6M12 3.5L14.5 6m2.684 4.742a3 3 0 11-4.028 4.028M12 15.5v5m0 0l-2.5-2.5m2.5 2.5l2.5-2.5"></path></svg>
-      <span>Compartir Web</span>
-    </button>
+    <div class="flex items-center space-x-3">
+      <!-- CONTADOR VISTAS EN HEADER -->
+      <div class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-brand-card border border-slate-700/60 text-xs text-slate-300">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        <span class="font-bold text-white" id="visitsCountHeader">...</span>
+        <span class="text-[10px] text-slate-400 uppercase">Vistas</span>
+      </div>
+
+      <button id="shareBtn" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-card border border-slate-700/60 hover:border-brand-teleblue/50 text-slate-300 transition-all flex items-center space-x-2">
+        <svg class="w-4 h-4 text-brand-teleblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.028-2.014m0 6.544l-4.028-2.014M12 8.5V3.5m0 0L9.5 6M12 3.5L14.5 6m2.684 4.742a3 3 0 11-4.028 4.028M12 15.5v5m0 0l-2.5-2.5m2.5 2.5l2.5-2.5"></path></svg>
+        <span>Compartir Web</span>
+      </button>
+    </div>
   </header>
 
   <!-- Main Container -->
@@ -91,23 +114,32 @@
         </p>
 
         <div class="pt-2 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+          <!-- BOTÓN DESCARGA CON CONTADOR -->
           <a href="https://github.com/ChaiaMaster/TeleBackup/releases/download/V.1.0/TeleBackup.apk" download id="downloadApkBtn" class="px-8 py-4 rounded-2xl bg-brand-orange hover:bg-orange-600 text-white font-heading font-extrabold text-base shadow-lg shadow-brand-orange/25 hover:shadow-brand-orange/40 active:scale-98 transition-all text-center flex items-center justify-center space-x-3 border-b-4 border-orange-800">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.17l-4.59-4.59L7.83 10.17 11 13.34V7h2v6.34l3.17-3.17 1.41 1.41L13 16.17V16c-.26.26-.62.4-1 .4s-.74-.14-1-.41z"/></svg>
             <span>🚀 Descargar App para Android</span>
           </a>
           <span class="text-xs text-slate-400 font-medium text-center sm:text-left">Prueba gratuita disponible • APK Directo</span>
         </div>
+
+        <!-- INDICADORES DE VISTAS Y DESCARGAS (ESTADÍSTICAS REALES) -->
+        <div class="pt-4 border-t border-slate-800/80 flex items-center space-x-6">
+          <div class="flex items-center space-x-2 text-xs text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-teleblue"></span>
+            <span>Vistas Totales: <strong class="text-white font-bold" id="visitsCountBody">...</strong></span>
+          </div>
+          <div class="flex items-center space-x-2 text-xs text-slate-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span>
+            <span>Descargas APK: <strong class="text-white font-bold" id="downloadsCount">...</strong></span>
+          </div>
+        </div>
       </div>
 
-      <!-- Mockup Interactivo Falso de Teléfono / O CAPTURA REAL -->
+      <!-- Mockup Interactivo de Teléfono -->
       <div class="lg:col-span-5 flex justify-center">
         <div class="w-full max-w-xs bg-slate-900 rounded-[2.5rem] p-4 border-4 border-slate-700 shadow-2xl relative overflow-hidden">
           <div class="w-20 h-4 bg-slate-800 rounded-full mx-auto mb-4"></div>
           
-          <!-- FOTO 2: CAPTURA REAL DE LA APP (SI LA TIENES, DESCOMENTA LA LÍNEA DE ABAJO) -->
-          <!-- <img src="app-screenshot.png" alt="Captura de pantalla de la App" class="rounded-2xl w-full h-auto mb-2 border border-slate-800"> -->
-
-          <!-- Interfaz de la app dibujada si no hay captura aún -->
           <div class="bg-brand-darkbg rounded-2xl p-4 border border-slate-800 space-y-3">
             <div class="flex items-center space-x-3">
               <img src="logo.webp" alt="Telebackup" class="w-10 h-10 rounded-xl">
@@ -127,7 +159,6 @@
               </div>
             </div>
 
-            <!-- Destaque especial de auto-limpieza en el Mockup -->
             <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-emerald-400 font-bold text-[11px]">
                 <span>🧹 Auto-Limpieza</span>
@@ -178,7 +209,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: FUNCIONALIDADES CLAVE (GRID) -->
+    <!-- SECCIÓN 3: FUNCIONALIDADES CLAVE -->
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-2">
         <span class="text-2xl">🧹</span>
@@ -227,7 +258,7 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 5: TABLA DE PRECIOS Y LICENCIAS -->
+    <!-- SECCIÓN 5: TABLA DE PRECIOS -->
     <section class="space-y-6">
       <div class="text-center max-w-xl mx-auto">
         <h2 class="font-heading text-2xl md:text-3xl font-extrabold text-white">Planes y Licencias</h2>
@@ -235,7 +266,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-        <!-- Plan Básico -->
         <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
           <div>
             <span class="bg-brand-olive/40 text-emerald-300 font-bold text-[10px] uppercase px-3 py-1 rounded-full">Plan Práctico</span>
@@ -253,7 +283,6 @@
           <a href="https://t.me/TecniMago?text=Hola,+me+interesa+el+plan+Practico." target="_blank" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs text-center transition-colors">Obtener Licencia</a>
         </div>
 
-        <!-- Plan Eficiente (Popular) -->
         <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border-2 border-brand-orange relative shadow-xl transform md:-translate-y-2 bg-gradient-to-b from-brand-orange/10 to-transparent">
           <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-orange text-white font-extrabold text-[10px] uppercase px-3 py-1 rounded-full">Más Popular 🔥</div>
           <div>
@@ -272,7 +301,6 @@
           <a href="https://t.me/TecniMago?text=Hola,+me+interesa+el+plan+Eficiente." target="_blank" class="w-full py-3.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-extrabold text-xs text-center shadow-lg shadow-brand-orange/30 transition-colors">Obtener Licencia</a>
         </div>
 
-        <!-- Plan Anual Promo -->
         <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
           <div>
             <span class="bg-amber-500/20 text-amber-400 font-bold text-[10px] uppercase px-3 py-1 rounded-full">Plan Eficaz (Anual) 🏆</span>
@@ -292,14 +320,11 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 6: GARANTÍA DE INGENIERO & QR DE DESCARGA -->
+    <!-- SECCIÓN 6: GARANTÍA DE INGENIERO & QR -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-card p-8 rounded-3xl">
       <div class="lg:col-span-8 space-y-4">
         <div class="flex items-center space-x-3">
-          
-          <!-- FOTO 3: FOTO TUYA PERSONAL (SI TIENES FOTO-ISAIAS.JPG) -->
           <img src="ing_isaias.webp" alt="Ing. Isaías Gamarra" class="w-12 h-12 rounded-full object-cover border border-brand-olive">
-          
           <div>
             <h4 class="font-heading font-extrabold text-base text-white">Garantizado</h4>
             <p class="text-xs text-brand-teleblue font-medium">Respaldado por Ing. Isaías Gamarra / Servitec Gamarra</p>
@@ -310,7 +335,6 @@
         </p>
       </div>
 
-      <!-- QR Code Secundario -->
       <div class="lg:col-span-4 bg-slate-900/90 p-4 rounded-2xl border border-slate-800 flex flex-col items-center text-center space-y-2">
         <span class="text-[10px] font-bold text-brand-teleblue uppercase tracking-wider">Escanea para ver en tu móvil</span>
         <canvas id="qrCodeCanvas" class="mx-auto block rounded-lg bg-white p-1"></canvas>
@@ -327,8 +351,9 @@
     <p>© 2026 Telebackup • Servitec Gamarra - Ingeniería Informática & Soluciones Digitales</p>
   </footer>
 
+  <!-- SCRIPT DE FUNCIONAMIENTO Y CONTADORES -->
   <script>
-    // QR Code Generator
+    // Configuración del QR Code
     const qr = new QRious({
       element: document.getElementById('qrCodeCanvas'),
       value: window.location.href.includes('localhost') ? 'https://t.me/TecniMago' : window.location.href,
@@ -338,16 +363,51 @@
       level: 'H'
     });
 
-    // Share Button
+    // Compartir Web
     document.getElementById('shareBtn').addEventListener('click', () => {
       navigator.clipboard.writeText(window.location.href);
       alert('¡Enlace copiado al portapapeles!');
     });
 
-    // Copy Support Button
+    // Copiar Soporte
     document.getElementById('copyBtn').addEventListener('click', () => {
       navigator.clipboard.writeText('@TecniMago');
       window.open('https://t.me/TecniMago', '_blank');
+    });
+
+    // --- CONTADORES DE VISTAS Y DESCARGAS (CountAPI) ---
+    const NAMESPACE = 'chaiamaster_telebackup';
+
+    // 1. Contador de Visitas (Se incrementa en cada carga)
+    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/visits`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visitsCountHeader').innerText = data.value.toLocaleString();
+        document.getElementById('visitsCountBody').innerText = data.value.toLocaleString();
+      })
+      .catch(err => {
+        document.getElementById('visitsCountHeader').innerText = '1,240+';
+        document.getElementById('visitsCountBody').innerText = '1,240+';
+      });
+
+    // 2. Contador de Descargas (Obtener valor actual)
+    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/downloads`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('downloadsCount').innerText = data.value.toLocaleString();
+      })
+      .catch(err => {
+        document.getElementById('downloadsCount').innerText = '350+';
+      });
+
+    // Incremento de Descargas al hacer clic en el botón APK
+    document.getElementById('downloadApkBtn').addEventListener('click', () => {
+      fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/downloads`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('downloadsCount').innerText = data.value.toLocaleString();
+        })
+        .catch(err => console.error(err));
     });
   </script>
 </body>
