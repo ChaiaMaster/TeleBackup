@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TeleBackup - Tu Teléfono con Almacenamiento Ilimitado</title>
 
-  <!-- META ETIQUETAS OPEN GRAPH / VISTA PREVIA PARA REDES (ACTUALIZADO) -->
+  <!-- META ETIQUETAS OPEN GRAPH / VISTA PREVIA PARA REDES -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chaiamaster.github.io/TeleBackup">
   <meta property="og:title" content="TeleBackup - Almacenamiento Ilimitado en Telegram 🚀">
   <meta property="og:description" content="Respalda fotos, videos y documentos automáticamente a tu Telegram personal. ¡Libera memoria física y olvídate de las cuotas mensuales!">
-  
-  <!-- ESTE ES EL ENLACE A LA IMAGEN QUE TE DI ARRIBA -->
   <meta property="og:image" content="https://chaiamaster.github.io/TeleBackup/og-banner.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -51,6 +49,20 @@
           fontFamily: {
             heading: ['Plus Jakarta Sans', 'sans-serif'],
             sans: ['Inter', 'sans-serif']
+          },
+          animation: {
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.8' },
+            }
           }
         }
       }
@@ -63,83 +75,71 @@
       color: #F8FAFC;
     }
     .glass-card {
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.75);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-6px);
+      border-color: rgba(34, 158, 217, 0.3);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
-<body class="font-sans min-h-screen flex flex-col justify-between selection:bg-brand-orange selection:text-white">
+<body class="font-sans min-h-screen flex flex-col justify-between selection:bg-brand-orange selection:text-white relative overflow-x-hidden">
+
+  <!-- Luces Decorativas de Fondo (Glow Effect Ligero) -->
+  <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-teleblue/15 blur-[120px] rounded-full pointer-events-none animate-pulse-glow"></div>
+  <div class="absolute top-[800px] right-0 w-[400px] h-[300px] bg-brand-orange/10 blur-[100px] rounded-full pointer-events-none"></div>
 
   <!-- Header -->
   <header class="w-full max-w-6xl mx-auto px-4 pt-6 pb-2 flex justify-between items-center z-10">
     <div class="flex items-center space-x-3">
-      <img src="logo.webp" alt="TeleBackup Logo" class="w-10 h-10 rounded-xl shadow-md border border-brand-teleblue/30 object-cover">
+      <img src="logo.webp" alt="TeleBackup Logo" class="w-10 h-10 rounded-xl shadow-md border border-brand-teleblue/30 object-cover hover:scale-105 transition-transform">
       <div>
         <span class="font-heading font-extrabold text-lg tracking-tight text-white block leading-none">TeleBackup</span>
         <span class="text-[10px] text-brand-teleblue font-semibold tracking-wider uppercase">Powered by Telegram API</span>
       </div>
     </div>
     
-    <div class="flex items-center space-x-3">
-      <!-- CONTADOR VISTAS EN HEADER (OCULTO EN MÓVIL) -->
-      <div class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-brand-card border border-slate-700/60 text-xs text-slate-300">
-        <svg class="w-4 h-4 text-brand-teleblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-        <span class="font-bold text-white" id="visitsCountHeader">...</span>
-        <span class="text-[10px] text-slate-400 uppercase">Vistas</span>
-      </div>
-
-      <button id="shareBtn" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-card border border-slate-700/60 hover:border-brand-teleblue/50 text-slate-300 transition-all flex items-center space-x-2">
-        <svg class="w-4 h-4 text-brand-teleblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.028-2.014m0 6.544l-4.028-2.014M12 8.5V3.5m0 0L9.5 6M12 3.5L14.5 6m2.684 4.742a3 3 0 11-4.028 4.028M12 15.5v5m0 0l-2.5-2.5m2.5 2.5l2.5-2.5"></path></svg>
-        <span>Compartir Web</span>
-      </button>
-    </div>
+    <button id="shareBtn" class="px-3.5 py-2 text-xs font-semibold rounded-xl bg-brand-card border border-slate-700/60 hover:border-brand-teleblue/50 text-slate-300 hover:text-white active:scale-95 transition-all flex items-center space-x-2">
+      <svg class="w-4 h-4 text-brand-teleblue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 10.742l4.028-2.014m0 6.544l-4.028-2.014M12 8.5V3.5m0 0L9.5 6M12 3.5L14.5 6m2.684 4.742a3 3 0 11-4.028 4.028M12 15.5v5m0 0l-2.5-2.5m2.5 2.5l2.5-2.5"></path></svg>
+      <span>Compartir Web</span>
+    </button>
   </header>
 
   <!-- Main Container -->
-  <main class="w-full max-w-6xl mx-auto px-4 py-6 flex-grow space-y-12">
+  <main class="w-full max-w-6xl mx-auto px-4 py-6 flex-grow space-y-12 z-10">
     
-    <!-- HERO (IMPACTO DIRECTO) -->
-    <section class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <!-- SECCIÓN 1: HERO (IMPACTO DIRECTO CON MOCKUP FLOTANTE) -->
+    <section class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-t border-white/10">
       <div class="lg:col-span-7 space-y-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-olive/40 border border-brand-olive text-emerald-300 text-xs font-bold uppercase tracking-wider">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-olive/40 border border-brand-olive text-emerald-300 text-xs font-bold uppercase tracking-wider">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Tecnología Servitec Gamarra</span>
         </div>
         
         <h1 class="font-heading text-3xl md:text-5xl font-black text-white leading-tight">
-          Tu teléfono con almacenamiento ilimitado. <span class="text-brand-orange">Para siempre.</span>
+          Tu teléfono con almacenamiento ilimitado. <span class="text-brand-orange bg-clip-text">Para siempre.</span>
         </h1>
         
         <p class="text-slate-300 text-sm md:text-base leading-relaxed">
           Respalda automáticamente tus fotos, videos y documentos a tu Telegram personal. <strong class="text-emerald-400 font-semibold">Elimina los archivos respaldados de tu móvil con un solo toque y recupera tu memoria física al instante.</strong>
         </p>
 
-        <div class="pt-2 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center relative">
-          <!-- BOTÓN DESCARGA (CON ID PARA JS) -->
-          <a href="https://github.com/ChaiaMaster/TeleBackup/releases/download/V.1.0/TeleBackup.apk" download id="downloadBtnHero" class="px-8 py-4 rounded-2xl bg-brand-orange hover:bg-orange-600 text-white font-heading font-extrabold text-base shadow-lg shadow-brand-orange/25 hover:shadow-brand-orange/40 active:scale-98 transition-all text-center flex items-center justify-center space-x-3 border-b-4 border-orange-800 z-10 relative">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.17l-4.59-4.59L7.83 10.17 11 13.34V7h2v6.34l3.17-3.17 1.41 1.41L13 16.17V16c-.26.26-.62.4-1 .4s-.74-.14-1-.41z"/></svg>
+        <div class="pt-2 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+          <a href="https://github.com/ChaiaMaster/TeleBackup/releases/download/V.1.0/TeleBackup.apk" download id="downloadBtnHero" class="px-8 py-4 rounded-2xl bg-brand-orange hover:bg-orange-600 text-white font-heading font-extrabold text-base shadow-lg shadow-brand-orange/25 hover:shadow-brand-orange/40 hover:-translate-y-0.5 active:translate-y-0 transition-all text-center flex items-center justify-center space-x-3 border-b-4 border-orange-800">
+            <svg class="w-6 h-6 animate-bounce" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.17l-4.59-4.59L7.83 10.17 11 13.34V7h2v6.34l3.17-3.17 1.41 1.41L13 16.17V16c-.26.26-.62.4-1 .4s-.74-.14-1-.41z"/></svg>
             <span>🚀 Descargar APK para Android</span>
           </a>
           <span class="text-xs text-slate-400 font-medium text-center sm:text-left">Prueba gratuita disponible • APK Directo</span>
         </div>
-
-        <!-- INDICADORES DE VISTAS Y DESCARGAS (CONTADORES REALES) -->
-        <div class="pt-6 border-t border-slate-800/80 flex items-center space-x-6">
-          <div class="flex items-center space-x-2.5 text-xs text-slate-400">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-teleblue"></span>
-            <span>Vistas Totales: <strong class="text-white font-bold" id="visitsCountBody">...</strong></span>
-          </div>
-          <div class="flex items-center space-x-2.5 text-xs text-slate-400">
-            <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span>
-            <span>Descargas APK: <strong class="text-white font-bold" id="downloadsCountBody">...</strong></span>
-          </div>
-        </div>
       </div>
 
-      <!-- Mockup Interactivo Falso de Teléfono -->
+      <!-- Mockup Interactivo de Teléfono con Animación Flotante -->
       <div class="lg:col-span-5 flex justify-center">
-        <div class="w-full max-w-xs bg-slate-900 rounded-[2.5rem] p-4 border-4 border-slate-700 shadow-2xl relative overflow-hidden">
+        <div class="w-full max-w-xs bg-slate-900 rounded-[2.5rem] p-4 border-4 border-slate-700 shadow-2xl relative overflow-hidden animate-float">
           <div class="w-20 h-4 bg-slate-800 rounded-full mx-auto mb-4"></div>
           
           <div class="bg-brand-darkbg rounded-2xl p-4 border border-slate-800 space-y-3">
@@ -157,14 +157,14 @@
                 <span class="text-brand-teleblue font-bold">100%</span>
               </div>
               <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
-                <div class="bg-brand-teleblue h-full w-full"></div>
+                <div class="bg-brand-teleblue h-full w-full animate-pulse"></div>
               </div>
             </div>
 
             <div class="p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl space-y-1">
               <div class="flex items-center justify-between text-emerald-400 font-bold text-[11px]">
                 <span>🧹 Auto-Limpieza</span>
-                <span class="text-[9px] bg-emerald-500/20 px-1.5 py-0.5 rounded">+12.4 GB Libres</span>
+                <span class="text-[9px] bg-emerald-500/20 px-1.5 py-0.5 rounded text-emerald-300 animate-pulse">+12.4 GB Libres</span>
               </div>
               <p class="text-[10px] text-slate-300">Archivos borrados del teléfono de forma segura tras confirmarse en Telegram.</p>
             </div>
@@ -211,27 +211,27 @@
       </div>
     </section>
 
-    <!-- SECCIÓN 3: FUNCIONALIDADES CLAVE -->
+    <!-- SECCIÓN 3: FUNCIONALIDADES CLAVE (CON HOVER ANIMADO) -->
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-2">
+      <div class="glass-card glass-card-hover p-5 rounded-2xl border-l-4 border-l-emerald-500 space-y-2">
         <span class="text-2xl">🧹</span>
         <h4 class="font-heading font-bold text-sm text-white">Auto-Limpieza Real</h4>
         <p class="text-xs text-slate-400 leading-relaxed">Borra automáticamente de tu dispositivo las fotos y videos que ya se respaldaron con éxito en tu Telegram.</p>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brand-olive space-y-2">
+      <div class="glass-card glass-card-hover p-5 rounded-2xl border-l-4 border-l-brand-olive space-y-2">
         <span class="text-2xl">🔒</span>
         <h4 class="font-heading font-bold text-sm text-white">100% Privado y Directo</h4>
         <p class="text-xs text-slate-400 leading-relaxed">Tus archivos van de tu teléfono a tu Telegram personal sin intermediarios ni servidores almacenando tus fotos.</p>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brand-teleblue space-y-2">
+      <div class="glass-card glass-card-hover p-5 rounded-2xl border-l-4 border-l-brand-teleblue space-y-2">
         <span class="text-2xl">⚡</span>
         <h4 class="font-heading font-bold text-sm text-white">Segundo Plano</h4>
         <p class="text-xs text-slate-400 leading-relaxed">Configúralo una sola vez y olvídate. La app trabaja discretamente mientras usas tu teléfono o duermes.</p>
       </div>
 
-      <div class="glass-card p-5 rounded-2xl border-l-4 border-l-brand-orange space-y-2">
+      <div class="glass-card glass-card-hover p-5 rounded-2xl border-l-4 border-l-brand-orange space-y-2">
         <span class="text-2xl">🔑</span>
         <h4 class="font-heading font-bold text-sm text-white">Gestión por Licencias</h4>
         <p class="text-xs text-slate-400 leading-relaxed">Activa tu dispositivo en segundos mediante tu clave de licencia individual de forma garantizada.</p>
@@ -242,18 +242,18 @@
     <section class="glass-card p-8 rounded-3xl space-y-6">
       <h3 class="font-heading text-center font-extrabold text-xl text-white uppercase tracking-wider">Configura en 3 Pasos Simples</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-        <div class="space-y-2">
-          <div class="w-12 h-12 rounded-2xl bg-brand-olive text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md">1</div>
+        <div class="space-y-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-olive text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md group-hover:scale-110 transition-transform">1</div>
           <h4 class="font-heading font-bold text-sm text-white">Instala el APK</h4>
           <p class="text-xs text-slate-400">Descarga e instala Telebackup en tu teléfono Android.</p>
         </div>
-        <div class="space-y-2">
-          <div class="w-12 h-12 rounded-2xl bg-brand-teleblue text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md">2</div>
+        <div class="space-y-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-teleblue text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md group-hover:scale-110 transition-transform">2</div>
           <h4 class="font-heading font-bold text-sm text-white">Vincula con Telegram</h4>
           <p class="text-xs text-slate-400">Conecta con tu cuenta para crear la nube privada.</p>
         </div>
-        <div class="space-y-2">
-          <div class="w-12 h-12 rounded-2xl bg-brand-orange text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md">3</div>
+        <div class="space-y-2 group">
+          <div class="w-12 h-12 rounded-2xl bg-brand-orange text-white font-heading font-black flex items-center justify-center text-lg mx-auto shadow-md group-hover:scale-110 transition-transform">3</div>
           <h4 class="font-heading font-bold text-sm text-white">¡Libera Memoria!</h4>
           <p class="text-xs text-slate-400">Sube todo a Telegram y limpia tu almacenamiento físico.</p>
         </div>
@@ -268,7 +268,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
+        <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
           <div>
             <span class="bg-brand-olive/40 text-emerald-300 font-bold text-[10px] uppercase px-3 py-1 rounded-full">Plan Práctico</span>
             <h3 class="font-heading font-extrabold text-lg text-white mt-3">Sólo Fotos</h3>
@@ -285,8 +285,8 @@
           <a href="https://t.me/TecniMago?text=Hola,+me+interesa+el+plan+Practico." target="_blank" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs text-center transition-colors">Obtener Licencia</a>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border-2 border-brand-orange relative shadow-xl transform md:-translate-y-2 bg-gradient-to-b from-brand-orange/10 to-transparent">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-orange text-white font-extrabold text-[10px] uppercase px-3 py-1 rounded-full">Más Popular 🔥</div>
+        <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between border-2 border-brand-orange relative shadow-xl md:-translate-y-2 bg-gradient-to-b from-brand-orange/10 to-transparent">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-orange text-white font-extrabold text-[10px] uppercase px-3 py-1 rounded-full shadow-md">Más Popular 🔥</div>
           <div>
             <span class="bg-brand-orange/20 text-brand-orange font-bold text-[10px] uppercase px-3 py-1 rounded-full mt-1 inline-block">Plan Eficiente</span>
             <h3 class="font-heading font-extrabold text-lg text-white mt-3">Fotos, Videos y Docs</h3>
@@ -303,7 +303,7 @@
           <a href="https://t.me/TecniMago?text=Hola,+me+interesa+el+plan+Eficiente." target="_blank" class="w-full py-3.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-extrabold text-xs text-center shadow-lg shadow-brand-orange/30 transition-colors">Obtener Licencia</a>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
+        <div class="glass-card glass-card-hover rounded-3xl p-6 flex flex-col justify-between border border-slate-800">
           <div>
             <span class="bg-amber-500/20 text-amber-400 font-bold text-[10px] uppercase px-3 py-1 rounded-full">Plan Eficaz (Anual) 🏆</span>
             <h3 class="font-heading font-extrabold text-lg text-white mt-3">Ahorra y Asegura</h3>
@@ -323,10 +323,10 @@
     </section>
 
     <!-- SECCIÓN 6: GARANTÍA DE INGENIERO & QR -->
-    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-card p-8 rounded-3xl">
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-card p-8 rounded-3xl border border-slate-800">
       <div class="lg:col-span-8 space-y-4">
         <div class="flex items-center space-x-3">
-          <img src="ing_isaias.webp" alt="Ing. Isaías Gamarra" class="w-12 h-12 rounded-full object-cover border border-brand-olive">
+          <img src="ing_isaias.webp" alt="Ing. Isaías Gamarra" class="w-12 h-12 rounded-full object-cover border border-brand-olive shadow-md">
           <div>
             <h4 class="font-heading font-extrabold text-base text-white">Garantizado</h4>
             <p class="text-xs text-brand-teleblue font-medium">Respaldado por Ing. Isaías Gamarra / Servitec Gamarra</p>
@@ -339,8 +339,8 @@
 
       <div class="lg:col-span-4 bg-slate-900/90 p-4 rounded-2xl border border-slate-800 flex flex-col items-center text-center space-y-2">
         <span class="text-[10px] font-bold text-brand-teleblue uppercase tracking-wider">Escanea para ver en tu móvil</span>
-        <canvas id="qrCodeCanvas" class="mx-auto block rounded-lg bg-white p-1"></canvas>
-        <button id="copyBtn" class="text-xs text-slate-300 font-bold hover:text-brand-orange flex items-center gap-1 mt-1">
+        <canvas id="qrCodeCanvas" class="mx-auto block rounded-lg bg-white p-1 shadow-sm"></canvas>
+        <button id="copyBtn" class="text-xs text-slate-300 font-bold hover:text-brand-orange flex items-center gap-1 mt-1 transition-colors">
           <span>Soporte Telegram: @TecniMago</span>
         </button>
       </div>
@@ -349,11 +349,10 @@
   </main>
 
   <!-- Footer -->
-  <footer class="w-full text-center py-6 text-xs text-slate-500 border-t border-slate-800/80 mt-8">
+  <footer class="w-full text-center py-6 text-xs text-slate-500 border-t border-slate-800/80 mt-8 z-10">
     <p>© 2026 Telebackup • Servitec Gamarra - Ingeniería Informática & Soluciones Digitales</p>
   </footer>
 
-  <!-- SCRIPT DE FUNCIONAMIENTO Y CONTADORES REALES -->
   <script>
     // Configuración del QR Code
     const qr = new QRious({
@@ -375,45 +374,6 @@
     document.getElementById('copyBtn').addEventListener('click', () => {
       navigator.clipboard.writeText('@TecniMago');
       window.open('https://t.me/TecniMago', '_blank');
-    });
-
-    // --- LÓGICA DE CONTADORES REALES (CountAPI) ---
-    // Usamos 'hit' para incrementar y 'get' para solo leer.
-    const namespace = 'chaiamaster_telebackup'; // Único para tu app
-
-    // 1. Visitas (Se incrementa CADA VEZ que alguien entra)
-    fetch(`https://api.countapi.xyz/hit/${namespace}/visits`)
-      .then(response => response.json())
-      .then(data => {
-        const formattedVisits = data.value.toLocaleString('es-ES');
-        document.getElementById('visitsCountHeader').innerText = formattedVisits;
-        document.getElementById('visitsCountBody').innerText = formattedVisits;
-      })
-      .catch(error => {
-        console.error('Error en contador de visitas:', error);
-        document.getElementById('visitsCountHeader').innerText = '1'; // Fallback
-        document.getElementById('visitsCountBody').innerText = '1';
-      });
-
-    // 2. Descargas (Obtenemos el valor actual al cargar)
-    fetch(`https://api.countapi.xyz/get/${namespace}/downloads`)
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('downloadsCountBody').innerText = data.value.toLocaleString('es-ES');
-      })
-      .catch(error => {
-        console.error('Error obteniendo descargas:', error);
-        document.getElementById('downloadsCountBody').innerText = '0'; // Fallback
-      });
-
-    // Lógica para incrementar descargas cuando hacen clic
-    document.getElementById('downloadBtnHero').addEventListener('click', () => {
-      fetch(`https://api.countapi.xyz/hit/${namespace}/downloads`)
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('downloadsCountBody').innerText = data.value.toLocaleString('es-ES');
-        })
-        .catch(error => console.error('Error incrementando descargas:', error));
     });
   </script>
 </body>
